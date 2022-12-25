@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100vh;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.inner-content {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#history-photo, #achievements-photo, #stadium-photo, iframe {
+    width: 100%;
+}
+
+.nav-link.active {
+    font-weight: bold;
+}
+
+.home {
+    scroll-margin-top: 100px;
+    min-height: calc(100vh - 143px);
+    display: flex;
+    flex-grow: 1;
+    background: url("./img/Supporters_FC_Dnipro.JPG") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.history {
+    scroll-margin-top: 86px;
+    min-height: calc(100vh - 143px);
+    display: flex;
+    flex-grow: 1;
+    background: url("./img/fgwjihahszbiw7pn-amp.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.achievements {
+    scroll-margin-top: 86px;
+    min-height: calc(100vh - 143px);
+    display: flex;
+    flex-grow: 1;
+    background: url("./img/mini_pamjatnye-matchi-dnepra-582-8eed.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.attributes {
+    scroll-margin-top: 86px;
+    min-height: calc(100vh - 143px);
+    display: flex;
+    flex-grow: 1;
+    background: url("./img/https_www.sports.dp.uaimagesstoriesmyimagecatalog12igrok0.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.stadium {
+    scroll-margin-top: 86px;
+    min-height: calc(100vh - 143px);
+    display: flex;
+    flex-grow: 1;
+    background: url("./img/http_football-stadiums.ruwp-contentuploads201709dnipro-arena-12.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.col h3 {
+    padding-left: 20px;
+}
+
+.col ul {
+    padding-left: 60px;
+}
+
+@media (max-width: 767px) {
+     .home{
+        scroll-margin-top: 100px;
+     }
+     .history, .achievements, .attributes, .stadium {
+        scroll-margin-top: 69px;
+     }
+}
