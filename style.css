@@ -10,13 +10,37 @@ body {
     flex-direction: column !important;
 }
 
+.nav-link {
+    transition: none !important;
+}
+
+.form-switch .form-check-input {
+    width: 2.5em !important;
+}
+
+.form-check-input {
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+
+.form-check-input:focus {
+    box-shadow: none !important;
+}
+
 .inner-content {
     margin-top: auto;
     margin-bottom: auto;
 }
 
-#history-photo, #achievements-photo, #stadium-photo, iframe {
+#history-photo,
+#achievements-photo,
+#stadium-photo,
+iframe {
     width: 100%;
+}
+
+.navbar-nav-scroll {
+    max-height: var(--bs-scroll-height, 77vh) !important;
 }
 
 .nav-link.active {
@@ -25,7 +49,7 @@ body {
 
 .home {
     scroll-margin-top: 100px;
-    min-height: calc(100vh - 143px);
+    min-height: calc(100vh - 88px);
     display: flex;
     flex-grow: 1;
     background: url("./img/Supporters_FC_Dnipro.JPG") no-repeat center center fixed;
@@ -36,8 +60,8 @@ body {
 }
 
 .history {
-    scroll-margin-top: 86px;
-    min-height: calc(100vh - 143px);
+    scroll-margin-top: 85px;
+    min-height: calc(100vh - 88px);
     display: flex;
     flex-grow: 1;
     background: url("./img/fgwjihahszbiw7pn-amp.jpg") no-repeat center center fixed;
@@ -48,8 +72,8 @@ body {
 }
 
 .achievements {
-    scroll-margin-top: 86px;
-    min-height: calc(100vh - 143px);
+    scroll-margin-top: 85px;
+    min-height: calc(100vh - 88px);
     display: flex;
     flex-grow: 1;
     background: url("./img/mini_pamjatnye-matchi-dnepra-582-8eed.png") no-repeat center center fixed;
@@ -60,8 +84,8 @@ body {
 }
 
 .attributes {
-    scroll-margin-top: 86px;
-    min-height: calc(100vh - 143px);
+    scroll-margin-top: 85px;
+    min-height: calc(100vh - 88px);
     display: flex;
     flex-grow: 1;
     background: url("./img/https_www.sports.dp.uaimagesstoriesmyimagecatalog12igrok0.jpg") no-repeat center center fixed;
@@ -72,8 +96,8 @@ body {
 }
 
 .stadium {
-    scroll-margin-top: 86px;
-    min-height: calc(100vh - 143px);
+    scroll-margin-top: 85px;
+    min-height: calc(100vh - 88px);
     display: flex;
     flex-grow: 1;
     background: url("./img/http_football-stadiums.ruwp-contentuploads201709dnipro-arena-12.jpg") no-repeat center center fixed;
@@ -91,11 +115,50 @@ body {
     padding-left: 60px;
 }
 
-@media (max-width: 767px) {
-     .home{
+.form-check-input:checked {
+    background-color: black !important;
+    border-color: var(--bs-nav-link-color) !important;
+}
+
+.soc-links:hover {
+    opacity: 70%;
+    transition: opacity .15s ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+    .home {
         scroll-margin-top: 100px;
-     }
-     .history, .achievements, .attributes, .stadium {
+    }
+
+    .history,
+    .achievements,
+    .attributes,
+    .stadium {
         scroll-margin-top: 69px;
-     }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .soc-links {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+@media screen and (max-height: 400px) {
+    body {
+        zoom: 0.7;
+    }
+}
+
+@media screen and (max-height: 300px) {
+    .navbar-nav-scroll {
+        max-height: var(--bs-scroll-height, 100vh) !important;
+    }
+}
+
+@media screen and (max-height: 204px) {
+    .navbar-nav-scroll {
+        max-height: var(--bs-scroll-height, 70vh) !important;
+    }
 }
