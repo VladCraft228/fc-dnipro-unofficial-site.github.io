@@ -1,89 +1,90 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let savetheme = localStorage.getItem('data-bs-theme')
-    switch (savetheme) {
-        case 'white': {
-            document.querySelector('html').setAttribute('data-bs-theme', 'white')
-            document.querySelectorAll('svg').forEach((sv) => sv.setAttribute('fill', 'dark'))
-            document.querySelectorAll('.bg-color').forEach((el) => el.classList.remove('bg-dark'))
-            document.querySelectorAll('.bg-color').forEach((el) => el.classList.add('bg-white'))
-            break
-        }
-        case 'dark': {
-            document.querySelector('html').setAttribute('data-bs-theme', 'dark')
-            document.getElementById('flexSwitchCheckDefault').checked = true
-            document.querySelectorAll('svg').forEach((sv) => sv.setAttribute('fill', 'white'))
-            document.querySelectorAll('.bg-color').forEach((el) => el.classList.remove('bg-white'))
-            document.querySelectorAll('.bg-color').forEach((el) => el.classList.add('bg-dark'))
-            break
-        }
+    const html = document.querySelector('html');
+    const svgElements = document.querySelectorAll('svg');
+    const bgElements = document.querySelectorAll('.bg-color');
+    let saveTheme = localStorage.getItem('data-bs-theme');
+
+    switch (saveTheme) {
+        case 'white':
+            html.setAttribute('data-bs-theme', 'white');
+            svgElements.forEach((sv) => sv.setAttribute('fill', 'dark'));
+            bgElements.forEach((el) => el.classList.remove('bg-dark'));
+            bgElements.forEach((el) => el.classList.add('bg-white'));
+            break;
+
+        case 'dark':
+            html.setAttribute('data-bs-theme', 'dark');
+            document.getElementById('flexSwitchCheckDefault').checked = true;
+            svgElements.forEach((sv) => sv.setAttribute('fill', 'white'));
+            bgElements.forEach((el) => el.classList.remove('bg-white'));
+            bgElements.forEach((el) => el.classList.add('bg-dark'));
+            break;
     }
-})
+});
+const logoLink = document.getElementById("logo");
+const houseLink = document.getElementById("house");
+const histLink = document.getElementById("hist");
+const achievLink = document.getElementById("achiev");
+const attribLink = document.getElementById("attrib");
+const stadLink = document.getElementById("stad");
 
-document.getElementById("house").onclick = function () {
-    document.getElementById("house").classList.add('active')
-    document.getElementById("hist").classList.remove('active')
-    document.getElementById("achiev").classList.remove('active')
-    document.getElementById("attrib").classList.remove('active')
-    document.getElementById("stad").classList.remove('active')
-}
+logoLink.onclick = () => setActiveNavLink(houseLink);
+houseLink.onclick = () => setActiveNavLink(houseLink);
+histLink.onclick = () => setActiveNavLink(histLink);
+achievLink.onclick = () => setActiveNavLink(achievLink);
+attribLink.onclick = () => setActiveNavLink(attribLink);
+stadLink.onclick = () => setActiveNavLink(stadLink);
 
-document.getElementById("hist").onclick = function () {
-    document.querySelector("a").classList.remove('active')
-    document.getElementById("house").classList.remove('active')
-    document.getElementById("hist").classList.add('active')
-    document.getElementById("achiev").classList.remove('active')
-    document.getElementById("attrib").classList.remove('active')
-    document.getElementById("stad").classList.remove('active')
-}
+function setActiveNavLink(link) {
+    const navLinks = document.querySelectorAll('a');
+    const activeClass = 'active';
 
-
-document.getElementById("achiev").onclick = function () {
-    document.querySelector("a").classList.remove('active')
-    document.getElementById("house").classList.remove('active')
-    document.getElementById("hist").classList.remove('active')
-    document.getElementById("achiev").classList.add('active')
-    document.getElementById("attrib").classList.remove('active')
-    document.getElementById("stad").classList.remove('active')
-}
-
-document.getElementById("attrib").onclick = function () {
-    document.querySelector("a").classList.remove('active')
-    document.getElementById("house").classList.remove('active')
-    document.getElementById("hist").classList.remove('active')
-    document.getElementById("achiev").classList.remove('active')
-    document.getElementById("attrib").classList.add('active')
-    document.getElementById("stad").classList.remove('active')
-}
-
-document.getElementById("stad").onclick = function () {
-    document.querySelector("a").classList.remove('active')
-    document.getElementById("house").classList.remove('active')
-    document.getElementById("hist").classList.remove('active')
-    document.getElementById("achiev").classList.remove('active')
-    document.getElementById("attrib").classList.remove('active')
-    document.getElementById("stad").classList.add('active')
+    navLinks.forEach((navLink) => {
+        if (navLink === link) {
+            navLink.classList.add(activeClass);
+        } else {
+            navLink.classList.remove(activeClass);
+        }
+    });
 }
 
 function SkinToggler() {
-    let changertext = document.querySelector('html')
-    switch (changertext.getAttribute('data-bs-theme')) {
-        case "white":
-            {
-                localStorage.setItem('data-bs-theme', 'dark')
-                changertext.setAttribute('data-bs-theme', 'dark')
-                document.querySelectorAll('svg').forEach((sv) => sv.setAttribute('fill', 'white'))
-                document.querySelectorAll('.bg-color').forEach((el) => el.classList.remove('bg-white'))
-                document.querySelectorAll('.bg-color').forEach((el) => el.classList.add('bg-dark'))
-                break
-            }
-        case "dark":
-            {
-                localStorage.setItem('data-bs-theme', 'white')
-                changertext.setAttribute('data-bs-theme', 'white')
-                document.querySelectorAll('svg').forEach((sv) => sv.setAttribute('fill', 'dark'))
-                document.querySelectorAll('.bg-color').forEach((el) => el.classList.remove('bg-dark'))
-                document.querySelectorAll('.bg-color').forEach((el) => el.classList.add('bg-white'))
-                break
-            }
+    let changertext = document.querySelector('html');
+    let theme = changertext.getAttribute('data-bs-theme') === 'white' ? 'dark' : 'white';
+    localStorage.setItem('data-bs-theme', theme);
+    changertext.setAttribute('data-bs-theme', theme);
+
+    // Отримуємо всі елементи, на яких потрібно змінити колір фону або кольору іконок
+    let svgs = document.querySelectorAll('svg');
+    let bgEls = document.querySelectorAll('.bg-color');
+    const bodyElements = document.querySelector('body');
+
+    // Застосовуємо плавну зміну кольору
+    if (theme === 'dark') {
+        bodyElements.classList.add('bg-dark');
+        bodyElements.classList.remove('bg-white');
+        svgs.forEach((sv) => {
+            sv.style.transition = 'fill 0.5s';
+            sv.style.fill = 'white';
+        });
+        bgEls.forEach((el) => {
+            el.style.transition = 'background-color 0.5s';
+            el.classList.remove('bg-white');
+            el.classList.add('bg-dark');
+        });
+    } else {
+        bodyElements.classList.add('bg-white');
+        bodyElements.classList.remove('bg-dark');
+        svgs.forEach((sv) => {
+            sv.style.transition = 'fill 0.5s';
+            sv.style.fill = 'dark';
+        });
+        bgEls.forEach((el) => {
+            el.style.transition = 'background-color 0.5s';
+            el.classList.remove('bg-dark');
+            el.classList.add('bg-white');
+        });
     }
 }
+
+

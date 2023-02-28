@@ -100,7 +100,7 @@ iframe {
     min-height: calc(100vh - 88px);
     display: flex;
     flex-grow: 1;
-    background: url("./img/http_football-stadiums.ruwp-contentuploads201709dnipro-arena-12.jpg") no-repeat center center fixed;
+    background: url("./img/1200px-FC_Dnipro_Dnipropetrovsk_stadium.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -125,6 +125,34 @@ iframe {
     transition: opacity .15s ease-in-out;
 }
 
+.bg-dark {
+    background-color: #212529 !important;
+}
+
+.transition {
+    transition: all 0.5s ease-in-out;
+}
+/*
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #00aeef;
+    border-radius: 20px;
+    border: 3px solid #fff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #004b96;
+    border-radius: 20px;
+    border: 3px solid #fff;
+}
+*/
 @media screen and (max-width: 767px) {
     .home {
         scroll-margin-top: 100px;
