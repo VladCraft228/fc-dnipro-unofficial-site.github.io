@@ -17,7 +17,7 @@
   <header class="sticky-top">
     <nav class="navbar bg-color p-0 p-md-2 navbar-expand-lg navbar-light bg-white">
       <div class="container flex-row text-center">
-        <a class="navbar-brand m-0 text-wrap" id="logo" href="#home"><img src="./img/Fcdniprologonew.png" width="68"
+        <a class="navbar-brand m-0 text-wrap" id="logo" href="#about"><img src="./img/Fcdniprologonew.png" width="68"
             alt="Dnipro-logo">
           <h5 class="d-sm-inline-block d-none ms-2">ФК Дніпро - неофіційний сайт</h5>
         </a>
@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto navbar-nav-scroll">
             <li class="nav-item">
-              <a class="nav-link" id="house" href="#home">Головна</a>
+              <a class="nav-link" id="abt" href="#about">Про клуб</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="hist" href="#history">Історія</a>
@@ -46,27 +46,12 @@
               <input class="form-check-input nav-link mt-0" type="checkbox" role="switch" id="flexSwitchCheckDefault"
                 onclick="SkinToggler()">
             </div>
-            <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Клуб
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-            -->
           </ul>
         </div>
       </div>
     </nav>
   </header>
-  <main class="home" id="home">
+  <main class="about" id="about">
     <div class="content bg-color d-flex align-items-center container-fluid bg-white bg-opacity-75 pt-5 pt-md-0">
       <div class="inner-content container  ">
         <div class="row row-cols-1 mb-5 row-cols-md-2">
@@ -696,6 +681,64 @@
             Ласкаво просимо на «Дніпро-Арену»!</p>
         </div>
       </div>
+    </div>
+  </main>
+  <main class="feedback" id="feedback">
+    <div class="content bg-color d-flex align-items-center container-fluid bg-white bg-opacity-75 pt-5">
+      <div class="inner-content container  ">
+        <h1 class="display-3 mb-5 text-center"><b>Залиште відгук</b></h1>
+        <form class="needs-validation mb-5" action="submit.php" method="POST" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label">Ваше ім'я</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+            <div class="valid-feedback">Усе добре!</div>
+            <div class="invalid-feedback">Будь ласка, введіть ваше ім'я!</div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Ваш email</label>
+            <input type="email" class="form-control" id="email" name="email" required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            <div class="valid-feedback">Усе добре!</div>
+            <div class="invalid-feedback">Будь ласка, коректно введіть ваш email!</div>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Ваш відгук</label>
+            <textarea class="form-control" id="message" name="message" rows="3" maxlength="3000" required></textarea>
+            <div class="valid-feedback">Усе добре!</div>
+            <div class="invalid-feedback">Будь ласка, введіть ваш відгук!</div>
+          </div>
+          <button type="submit" class="btn btn-primary">Відправити</button>
+          <!-- Модальне вікно для повідомлення про успішне надсилання форми -->
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header"></div>
+              <div class="modal-body">
+                <h5>Ваше повідомлення успішно надіслано.</h5>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрити</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Модальне вікно для повідомлення про помилку при надсиланні форми -->
+        <div class="modal fade" id="unsuccessModal" tabindex="-1" aria-labelledby="unsuccessModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header"></div>
+              <div class="modal-body">
+                <h5>Під час надсилання форми сталася помилка.</h5>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрити</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
     </div>
   </main>
   <footer class="d-block bg-color mt-auto py-3 bg-white">

@@ -1,35 +1,67 @@
+//Перемикання теми//
+
+function toggleTheme() {
+    const html = document.querySelector('html');
+    const svgElements = document.querySelectorAll('svg');
+    const bgElements = document.querySelectorAll('.bg-color');
+    const currentTheme = html.getAttribute('data-bs-theme');
+    const theme = currentTheme === 'white' ? 'dark' : 'white';
+
+    localStorage.setItem('data-bs-theme', theme);
+    html.setAttribute('data-bs-theme', theme);
+
+    svgElements.forEach((svg) => {
+        svg.style.transition = 'fill 0.5s';
+        svg.setAttribute('fill', theme === 'dark' ? 'white' : 'dark');
+    });
+
+    bgElements.forEach((el) => {
+        el.style.transition = 'background-color 0.5s';
+        el.classList.remove(theme === 'dark' ? 'bg-white' : 'bg-dark');
+        el.classList.add(theme === 'dark' ? 'bg-dark' : 'bg-white');
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const html = document.querySelector('html');
     const svgElements = document.querySelectorAll('svg');
     const bgElements = document.querySelectorAll('.bg-color');
-    let saveTheme = localStorage.getItem('data-bs-theme');
+    const savedTheme = localStorage.getItem('data-bs-theme');
 
-    switch (saveTheme) {
-        case 'white':
-            html.setAttribute('data-bs-theme', 'white');
-            svgElements.forEach((sv) => sv.setAttribute('fill', 'dark'));
-            bgElements.forEach((el) => el.classList.remove('bg-dark'));
-            bgElements.forEach((el) => el.classList.add('bg-white'));
-            break;
+    if (savedTheme) {
+        html.setAttribute('data-bs-theme', savedTheme);
 
-        case 'dark':
-            html.setAttribute('data-bs-theme', 'dark');
+        if (savedTheme === 'dark') {
             document.getElementById('flexSwitchCheckDefault').checked = true;
-            svgElements.forEach((sv) => sv.setAttribute('fill', 'white'));
-            bgElements.forEach((el) => el.classList.remove('bg-white'));
-            bgElements.forEach((el) => el.classList.add('bg-dark'));
-            break;
+            svgElements.forEach((svg) => svg.setAttribute('fill', 'white'));
+            bgElements.forEach((el) => {
+                el.classList.remove('bg-white');
+                el.classList.add('bg-dark');
+            });
+        } else {
+            svgElements.forEach((svg) => svg.setAttribute('fill', 'dark'));
+            bgElements.forEach((el) => {
+                el.classList.remove('bg-dark');
+                el.classList.add('bg-white');
+            });
+        }
     }
 });
+
+document.getElementById('flexSwitchCheckDefault').addEventListener('click', toggleTheme);
+
+
+// Активний якір //
+
 const logoLink = document.getElementById("logo");
-const houseLink = document.getElementById("house");
+const abtLink = document.getElementById("abt");
 const histLink = document.getElementById("hist");
 const achievLink = document.getElementById("achiev");
 const attribLink = document.getElementById("attrib");
 const stadLink = document.getElementById("stad");
 
-logoLink.onclick = () => setActiveNavLink(houseLink);
-houseLink.onclick = () => setActiveNavLink(houseLink);
+logoLink.onclick = () => setActiveNavLink(abtLink);
+abtLink.onclick = () => setActiveNavLink(abtLink);
 histLink.onclick = () => setActiveNavLink(histLink);
 achievLink.onclick = () => setActiveNavLink(achievLink);
 attribLink.onclick = () => setActiveNavLink(attribLink);
@@ -48,43 +80,46 @@ function setActiveNavLink(link) {
     });
 }
 
-function SkinToggler() {
-    let changertext = document.querySelector('html');
-    let theme = changertext.getAttribute('data-bs-theme') === 'white' ? 'dark' : 'white';
-    localStorage.setItem('data-bs-theme', theme);
-    changertext.setAttribute('data-bs-theme', theme);
+// Форма //
 
-    // Отримуємо всі елементи, на яких потрібно змінити колір фону або кольору іконок
-    let svgs = document.querySelectorAll('svg');
-    let bgEls = document.querySelectorAll('.bg-color');
-    const bodyElements = document.querySelector('body');
+const form = document.querySelector('.needs-validation');
 
-    // Застосовуємо плавну зміну кольору
-    if (theme === 'dark') {
-        bodyElements.classList.add('bg-dark');
-        bodyElements.classList.remove('bg-white');
-        svgs.forEach((sv) => {
-            sv.style.transition = 'fill 0.5s';
-            sv.style.fill = 'white';
-        });
-        bgEls.forEach((el) => {
-            el.style.transition = 'background-color 0.5s';
-            el.classList.remove('bg-white');
-            el.classList.add('bg-dark');
-        });
+form.addEventListener('submit', function (event) {
+    // Перевіряємо, чи пройшла форма валідацію
+    if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
     } else {
-        bodyElements.classList.add('bg-white');
-        bodyElements.classList.remove('bg-dark');
-        svgs.forEach((sv) => {
-            sv.style.transition = 'fill 0.5s';
-            sv.style.fill = 'dark';
-        });
-        bgEls.forEach((el) => {
-            el.style.transition = 'background-color 0.5s';
-            el.classList.remove('bg-dark');
-            el.classList.add('bg-white');
-        });
+        event.preventDefault();
+
+        // Перевіряємо доступність інтернету
+        if (navigator.onLine) {
+            // Створюємо об'єкт FormData для збору даних форми
+            const formData = new FormData(form);
+
+            // Надсилаємо дані на сервер за допомогою Fetch API
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                        successModal.show();
+                        form.reset();
+                    } else {
+                        var unsuccessModal = new bootstrap.Modal(document.getElementById('unsuccessModal'));
+                        unsuccessModal.show();
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error:', error);
+                });
+        } else {
+            // Якщо немає доступу до інтернету, обробляємо відправлення форми за замовчуванням
+            form.submit();
+        }
     }
-}
 
-
+    form.classList.add('was-validated');
+});
